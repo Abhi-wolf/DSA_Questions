@@ -5,8 +5,8 @@ class TrieNode
 {
 public:
     char data;
-    TrieNode *children[26];     //  there can be 26 different characters (a-z) 
-    bool isTerminal;            //  represents the last character or ending of a word
+    TrieNode *children[26]; //  there can be 26 different characters (a-z)
+    bool isTerminal;        //  represents the last character or ending of a word
 
     TrieNode(char ch)
     {
