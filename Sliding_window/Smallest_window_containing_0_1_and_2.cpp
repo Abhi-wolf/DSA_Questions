@@ -2,6 +2,19 @@
 #include <unordered_map>
 using namespace std;
 
+/*
+    Given a string S consisting of the characters 0, 1 and 2. Your task is to find the length
+    of the smallest substring of string S that contains all the three characters 0, 1 and 2.
+    If no such substring exists, then return -1.
+
+Example 1:
+Input:
+    S = "01212"
+Output: 3
+Explanation:
+    The substring 012 is the smallest substring that contains the characters 0, 1 and 2.
+*/
+
 int smallestSubstring(string s)
 {
     unordered_map<char, int> um;

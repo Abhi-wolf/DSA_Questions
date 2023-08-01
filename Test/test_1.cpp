@@ -1,112 +1,42 @@
-//{ Driver Code Starts
-//
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <deque>
+using namespace std;
 
-#include <bits/stdc++.h> 
-using namespace std; 
 
-struct Node
-{
-    int data;
-    struct Node* next;
-    
-    Node(int x){
-        data = x;
-        next = NULL;
+int longestValidSubstring(string word, vector<string>& forbidden) {
+    unordered_map<string,int>um;
+
+    for(int i=0;i<forbidden.size();i++) {
+        um[forbidden[i]]++;
     }
-};
 
-
-void printList(Node* node) 
-{ 
-	while (node != NULL) { 
-		cout << node->data <<" "; 
-		node = node->next; 
-	}  
-	cout<<"\n";
+    int i=0,j=0;
+    deque<char>dq;
+    while(j<word.size()) {
+        dq.push_back(word[j]);
+        if(um.find(word.substr(i,j))==um.end()) {
+            j++;
+        }
+        else {
+            cout<<word.substr(i,j)<<endl;
+            dq.pop_front();
+            i++;
+            j++;
+        }
+    }
+    return dq.size();
 }
 
-// } Driver Code Ends
-/*
-structure of the node of the list is as
-struct Node
-{
-    int data;
-    struct Node* next;
 
-    Node(int x){
-        data = x;
-        next = NULL;
-    }
-};
-*/
+int main() {
+    string str="cbaaaabc";
+    vector<string>vec;
+    vec.push_back("aaa");
+    vec.push_back("cb");
 
-class Solution{
-  public:
-    // Should return head of the modified linked list
-    Node *sortedInsert(struct Node* head, int data) {
-        // Code here
-        Node *t=new Node(data);
-        Node *p=head;
-        Node *q=NULL;
-        
-        if(head == NULL)
-        {
-            //t->next=head;
-            head=t;
-        }
-        else
-        {
-            while(p->data < data && p!=NULL)
-            {
-                q=p;
-                p=p->next;
-            }
-            
-            if(p==head)
-            {
-                t->next=head;
-                head=t;
-            }
-            else
-            {
-                t->next=q->next;   
-                q->next=t;
-            }
-        }
-        return head;
-    }
-};
-
-
-//{ Driver Code Starts.
-int main() 
-{ 
-	int t;
-	cin>>t;
-	while(t--)
-	{
-		int n;
-		cin>>n;
-        
-		int data;
-		cin>>data;
-		
-		struct Node *head = new Node(data);
-		struct Node *tail = head;
-		for (int i = 0; i < n-1; ++i)
-		{
-			cin>>data;
-			tail->next = new Node(data);
-			tail = tail->next;
-		}
-		
-		int k;
-		cin>>k;
-		Solution obj;
-		head = obj.sortedInsert(head,k);
-		printList(head); 
-	}
-	return 0; 
-} 
-
-// } Driver Code Ends
+    int ans=longestValidSubstring(str,vec);
+    cout<<"\nanswer = "<<ans<<endl;
+    return 0;
+}
