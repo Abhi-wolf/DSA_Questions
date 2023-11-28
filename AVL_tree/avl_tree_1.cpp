@@ -227,17 +227,55 @@ void inorder(node *p)
     }
 }
 
+
+bool isBST(node *n, int lower, int upper)
+{
+	if(!n) return 1;
+	if( n->data <= lower || n->data >= upper ) return 0;
+	return isBST(n->left, lower, n->data) && isBST(n->right, n->data, upper) ;
+}
+
+pair<int,bool> isBalanced(node* n)
+{
+	if(!n) return pair<int,bool> (0,1);
+
+	pair<int,bool> l = isBalanced(n->left);
+	pair<int,bool> r = isBalanced(n->right);
+
+	if( abs(l.first - r.first) > 1 ) return pair<int,bool> (0,0);
+
+	return pair<int,bool> ( 1 + max(l.first , r.first) , l.second && r.second );
+}
+
+bool isBalancedBST(node* root)
+{
+	if( !isBST(root, INT_MIN, INT_MAX) )
+		cout<< "BST voilated, inorder traversal : ";
+
+	else if ( ! isBalanced(root).second )
+		cout<< "Unbalanced BST, inorder traversal : ";
+
+	else return 1;
+	return 0;
+}
+
 int main()
 {
     node *root = NULL;
-    root = RInsert(root, 46);
-    root = RInsert(root, 20);
-    root = RInsert(root, 54);
-    root = RInsert(root, 18);
-    root = RInsert(root, 60);
-    root = RInsert(root, 7);
-    root = RInsert(root, 23);
-    root = RInsert(root, 24);
+    // root = RInsert(root, 46);
+    // root = RInsert(root, 20);
+    // root = RInsert(root, 54);
+    // root = RInsert(root, 18);
+    // root = RInsert(root, 60);
+    // root = RInsert(root, 7);
+    // root = RInsert(root, 23);
+    // root = RInsert(root, 24);
+
+    int arr[7]={21,26,30,9,4,14,28} ;
+    for(int i=0;i<7;i++) {
+        root=RInsert(root,arr[i]);
+        if(!isBalancedBST(root)) break;
+    }
 
 
     cout << "\nPreorder : ";
@@ -245,12 +283,12 @@ int main()
     cout << "\nInorder : ";
     inorder(root);
 
-    root=Delete(root,46);
+    // root=Delete(root,46);
 
-    cout << "\nPreorder : ";
-    preorder(root);
-    cout << "\nInorder : ";
-    inorder(root);
+    // cout << "\nPreorder : ";
+    // preorder(root);
+    // cout << "\nInorder : ";
+    // inorder(root);
 
     return 0;
 }

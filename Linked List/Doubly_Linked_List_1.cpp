@@ -167,6 +167,8 @@ void DoublyLL::Reverse()
 
 
 
+
+
 int main()
 {
     int A[]={1,2,3,4,5,6,7,8,9,10};
@@ -177,7 +179,7 @@ int main()
     obj.Insert(10,10000);
     obj.Display();
 
-    cout<<obj.Delete(10)<<endl;
+    // cout<<obj.Delete(10)<<endl;
     // obj.Reverse();
     obj.Display();
     return 0;

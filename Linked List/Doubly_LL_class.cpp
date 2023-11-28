@@ -190,6 +190,22 @@ void DeleteNode(Node *&head, int pos)
 }
 
 
+Node* Reverse(Node *head)
+{
+    Node *p,*q,*r;
+    p=head;
+    q=r=NULL;
+
+    while(p) {
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+        q->prev=p;
+    }
+    return q;
+}
+
 
 
 
@@ -216,7 +232,9 @@ int main()
     InsertAtPosition(head, tail, 1, 12);
     print(head);
 
-    DeleteNode(head,4);
+    // DeleteNode(head,4);
+    head=Reverse(head);
+    cout<<"reverse = ";
     print(head);
 
     

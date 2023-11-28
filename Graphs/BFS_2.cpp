@@ -7,7 +7,7 @@ using namespace std;
 
 class Graph
 {
-    int v;                 //  no of vertices
+    int v;                 //  no of vertices 
     vector<list<int>> adj; //  pointer to an array containing adjacency lists
 
 public:
