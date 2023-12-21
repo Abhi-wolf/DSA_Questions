@@ -1,6 +1,1 @@
-   // temp = bst.rSearch(bst.getRoot(), 20);
-    // if (temp != nullptr){
-    //     cout << temp->data << endl;
-    // } else {
-    //     cout << "Element not found" << endl;
-    // }
+{40,30,32,35,80,90,100,120}
