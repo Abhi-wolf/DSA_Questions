@@ -68,6 +68,15 @@ int Height(Node *p) {
 }
 
 // FIRST METHOD
+/**
+ * The function calculates the diameter of a binary tree and updates the height of the tree.
+ * 
+ * @param p p is a pointer to a Node in a binary tree.
+ * @param height The height parameter is a pointer to an integer that will store the height of the
+ * tree. It is used to keep track of the height of the current node while traversing the tree.
+ * 
+ * @return the diameter of the tree.
+ */
 int DiameterOfTree(Node *p,int *height)
 {
     int leftDia=0,rightDia=0;
