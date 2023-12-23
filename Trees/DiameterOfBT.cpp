@@ -68,7 +68,7 @@ int Height(Node *p) {
 }
 
 // FIRST METHOD
-/**
+/*
  * The function calculates the diameter of a binary tree and updates the height of the tree.
  * 
  * @param p p is a pointer to a Node in a binary tree.
