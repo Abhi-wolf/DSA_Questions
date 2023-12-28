@@ -1,110 +1,99 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 using namespace std;
 
 class Node
 {
-    public:
-        int data;
-        Node *lchild;
-        Node *rchild;
-    
+public:
+    int data;
+    Node *lchild;
+    Node *rchild;
+
     Node(int d)
     {
-        this->data=d;
-        this->lchild=NULL;
-        this->rchild=NULL;
+        this->data = d;
+        this->lchild = NULL;
+        this->rchild = NULL;
     }
 };
 
-
 void Preorder(Node *p)
 {
-    if(p!=NULL)
+    if (p != NULL)
     {
-        cout<<p->data<<"  ";
+        cout << p->data << "  ";
         Preorder(p->lchild);
         Preorder(p->rchild);
     }
 }
 
-
-
 void levelorder(Node *p)
 {
-    queue <Node*> q;
+    queue<Node *> q;
     q.push(p);
-    cout<<p->data<<"  ";
+    cout << p->data << "  ";
 
-    while(!q.empty())
+    while (!q.empty())
     {
-        p=q.front();
+        p = q.front();
         q.pop();
 
-        if(p->lchild)
+        if (p->lchild)
         {
             q.push(p->lchild);
-            cout<<p->lchild->data<<"  ";
+            cout << p->lchild->data << "  ";
         }
 
-        if(p->rchild)
+        if (p->rchild)
         {
             q.push(p->rchild);
-            cout<<p->rchild->data<<"  ";
+            cout << p->rchild->data << "  ";
         }
     }
-    cout<<endl;
+    cout << endl;
 }
 
-
-
-int searchInorder(int arr[],int instart,int inend,int data)
+int searchInorder(int arr[], int instart, int inend, int data)
 {
-    for(int i=instart;i<=inend;i++)
+    for (int i = instart; i <= inend; i++)
     {
-        if(arr[i] == data)
+        if (arr[i] == data)
             return i;
     }
     return -1;
 }
 
-
-
 //  GENERATION OF TREE IF PREORDER AND INORDER ARE GIVEN
-Node* generateFromTraversal(int *inorder,int *preorder,int instart,int inend)
+Node *generateFromTraversal(int *inorder, int *preorder, int instart, int inend)
 {
-    static int preindex=0;
+    static int preindex = 0;
 
-    if(instart > inend)
+    if (instart > inend)
         return nullptr;
-    
-    Node *node = new Node (preorder[preindex++]);
 
-    if(instart == inend)
+    Node *node = new Node(preorder[preindex++]);
+
+    if (instart == inend)
         return node;
-    
 
-    int splitIndex = searchInorder(inorder,instart,inend,node->data);
+    int splitIndex = searchInorder(inorder, instart, inend, node->data);
 
-    node->lchild=generateFromTraversal(inorder,preorder,instart,splitIndex-1);
-    
-    node->rchild=generateFromTraversal(inorder,preorder,splitIndex+1,inend);
+    node->lchild = generateFromTraversal(inorder, preorder, instart, splitIndex - 1);
+
+    node->rchild = generateFromTraversal(inorder, preorder, splitIndex + 1, inend);
 
     return node;
 }
 
-
-
-
-
 //  COUNT OF NUMBER OF NODES
 int count(Node *p)
 {
-    int x=0,y=0;
-    if(p!=NULL)
+    int x = 0, y = 0;
+    if (p != NULL)
     {
-        x=count(p->lchild);
-        y=count(p->rchild);
+        x = count(p->lchild);
+        y = count(p->rchild);
 
         /*  COUNT OF NODES STRICTLY HAVING TWO NODES
         if(p->lchild && p->rchild)
@@ -113,37 +102,29 @@ int count(Node *p)
             return (x+y);
         */
 
-       //   COUNT OF TOTAL NUMBERS OF NODES
-       return (x+y+1);
-       
-      
+        //   COUNT OF TOTAL NUMBERS OF NODES
+        return (x + y + 1);
+
         //  SUM OF DATAS OF IN ALL THE NODES
-        //return (x+y+p->data);
-
-
+        // return (x+y+p->data);
     }
     return 0;
 }
 
-
-
 //  CALCULATING HEIGHT OF TREE  (starts from 1)
 int height(Node *p)
 {
-    int x=0,y=0;
-    if(p==NULL)
+    int x = 0, y = 0;
+    if (p == NULL)
         return 0;
-    x=height(p->lchild);
-    y=height(p->rchild);
+    x = height(p->lchild);
+    y = height(p->rchild);
 
-    if(x>y)
-        return x+1;
+    if (x > y)
+        return x + 1;
     else
-        return y+1;
+        return y + 1;
 }
-
-
-
 
 //  COUNTING NO OF LEAF NODES IN THE TREE
 // LEAF NODES -- NODES HAVING NO CHILD      (external nodes)
@@ -151,103 +132,141 @@ int height(Node *p)
 
 int leaf_nodes(Node *p)
 {
-    int x=0,y=0;
+    int x = 0, y = 0;
 
-    if(p==NULL)
+    if (p == NULL)
         return 0;
-    
-    x=leaf_nodes(p->lchild);
-    y=leaf_nodes(p->rchild);
 
-    if(!p->lchild && !p->rchild)
-        return x+y+1;
+    x = leaf_nodes(p->lchild);
+    y = leaf_nodes(p->rchild);
+
+    if (!p->lchild && !p->rchild)
+        return x + y + 1;
     else
-        return x+y;
+        return x + y;
 }
-
-
 
 //  NON-LEAF NODES (OF DEGREE 2 MEANS NODES HAVING BOTH THE CHILDS)
 int Non_leaf_nodes_2(Node *p)
 {
-    int x=0,y=0;
+    int x = 0, y = 0;
 
-    if(p==NULL)
+    if (p == NULL)
         return 0;
-    
-    x=Non_leaf_nodes_2(p->lchild);
-    y=Non_leaf_nodes_2(p->rchild);
 
-    if(p->lchild && p->rchild)
-        return x+y+1;
+    x = Non_leaf_nodes_2(p->lchild);
+    y = Non_leaf_nodes_2(p->rchild);
+
+    if (p->lchild && p->rchild)
+        return x + y + 1;
     else
-        return x+y;
+        return x + y;
 }
-
-
 
 //  NON-LEAF NODES (OF DEGREE 1 MEANS NODES HAVING ONLY ONE CHILDS)
 int Non_leaf_nodes_degree_1(Node *p)
 {
-    int x=0,y=0;
+    int x = 0, y = 0;
 
-    if(p==NULL)
+    if (p == NULL)
         return 0;
-    
-    x=Non_leaf_nodes_degree_1(p->lchild);
-    y=Non_leaf_nodes_degree_1(p->rchild);
 
-    if((p->lchild!=NULL && p->rchild==NULL) || (p->lchild==NULL && p->rchild!=NULL))
-        return x+y+1;
+    x = Non_leaf_nodes_degree_1(p->lchild);
+    y = Non_leaf_nodes_degree_1(p->rchild);
+
+    if ((p->lchild != NULL && p->rchild == NULL) || (p->lchild == NULL && p->rchild != NULL))
+        return x + y + 1;
     else
-        return x+y;
+        return x + y;
 }
-
-
 
 //  NON-LEAF NODES (OF DEGREE 1 OR DEGREE 2 )
 int Non_leaf_nodes_degree_1_OR_2(Node *p)
 {
-    int x=0,y=0;
+    int x = 0, y = 0;
 
-    if(p==NULL)
+    if (p == NULL)
         return 0;
-    
-    x=Non_leaf_nodes_degree_1_OR_2(p->lchild);
-    y=Non_leaf_nodes_degree_1_OR_2(p->rchild);
 
-    if(p->lchild!=NULL || p->rchild!=NULL)
-        return x+y+1;
+    x = Non_leaf_nodes_degree_1_OR_2(p->lchild);
+    y = Non_leaf_nodes_degree_1_OR_2(p->rchild);
+
+    if (p->lchild != NULL || p->rchild != NULL)
+        return x + y + 1;
     else
-        return x+y;
+        return x + y;
 }
 
+vector<vector<int>> levelOrder(Node *root)
+{
+    vector<vector<int>> ans;
+    vector<int> temp;
 
+    queue<Node *> que;
+    que.push(root);
+    que.push(NULL);
+
+    while (!que.empty())
+    {
+        Node *p = que.front();
+        que.pop();
+
+        if (p == NULL)
+        {
+            if (temp.size() > 0)
+            {
+                ans.push_back(temp);
+                temp.clear();
+            }
+            if (!que.empty())
+            {
+                que.push(NULL);
+            }
+        }
+
+        else
+        {
+            temp.push_back(p->data);
+            if (p->lchild)
+                que.push(p->lchild);
+            if (p->rchild)
+                que.push(p->rchild);
+        }
+    }
+    return ans;
+}
 
 int main()
 {
-    // int preorder[] = {4, 7, 9, 6, 3, 2, 5, 8, 1};
-    // int inorder[] = {7, 6, 9, 3, 4, 5, 8, 2, 1};
+    int preorder[] = {4, 7, 9, 6, 3, 2, 5, 8, 1};
+    int inorder[] = {7, 6, 9, 3, 4, 5, 8, 2, 1};
 
-    int preorder[] = {1,2,4,5,3,6,7};
-    int inorder[] = {4,2,5,1,6,3,7};
-    
+    // int preorder[] = {1, 2, 4, 5, 3, 6, 7};
+    // int inorder[] = {4, 2, 5, 1, 6, 3, 7};
 
-    Node *ans=generateFromTraversal(inorder,preorder,0,6);
+    Node *ans = generateFromTraversal(inorder, preorder, 0, 9);
 
     levelorder(ans);
 
-    cout<<"Number of nodes in tree is "<<count(ans)<<"\n";
+    cout << "Number of nodes in tree is " << count(ans) << "\n";
 
-    cout<<"Height of in tree is "<<height(ans)<<"\n";
+    // cout << "Height of in tree is " << height(ans) << "\n";
 
-    cout<<"Number of leaf nodes in tree is "<<leaf_nodes(ans)<<endl;
+    // cout << "Number of leaf nodes in tree is " << leaf_nodes(ans) << endl;
 
-    cout<<"Number of non-leaf nodes in tree is "<<Non_leaf_nodes_2(ans)<<endl;
+    // cout << "Number of non-leaf nodes in tree is " << Non_leaf_nodes_2(ans) << endl;
 
-    cout<<"Number of non-leaf nodes of degree 1 in tree is "<<Non_leaf_nodes_degree_1(ans)<<endl;
+    // cout << "Number of non-leaf nodes of degree 1 in tree is " << Non_leaf_nodes_degree_1(ans) << endl;
 
-    cout<<"Number of non-leaf nodes of degree 1 or 2 in tree is "<<Non_leaf_nodes_degree_1_OR_2(ans)<<endl;
+    // cout << "Number of non-leaf nodes of degree 1 or 2 in tree is " << Non_leaf_nodes_degree_1_OR_2(ans) << endl;
 
+    vector<vector<int>> res = levelOrder(ans);
+    cout << "size of 2-d vector = " << res.size() << endl;
+    for (int i = 0; i < res.size(); i++)
+    {
+        for (int j = 0; j < res[i].size(); j++)
+            cout << res[i][j] << ", ";
+        cout << endl;
+    }
     return 0;
 }
