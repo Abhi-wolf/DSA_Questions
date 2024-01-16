@@ -58,13 +58,13 @@ void sortStack(stack<int> &st)
 
     int num = st.top();
     st.pop();
-    sort_stack(st);
+    sortStack(st);
     hepler(st, num);
 }
 
 int main()
 {
-    int arr[] = {11, 2, 32, 3, 41};
+    int arr[] = {11, 2, 32, 3, 41, 4, 9, 100};
     int n = sizeof(arr) / sizeof(arr[0]);
     stack<int> stk;
     for (int i = 0; i < n; i++)
