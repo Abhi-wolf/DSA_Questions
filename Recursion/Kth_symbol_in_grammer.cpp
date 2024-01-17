@@ -9,6 +9,11 @@ using namespace std;
 
     For example, for n = 3, the 1st row is 0, the 2nd row is 01, and the 3rd row is 0110.
     Given two integer n and k, return the kth (1-indexed) symbol in the nth row of a table of n rows.
+
+    k=1  0
+    k=2  0 1
+    k=3  0 1 1 0
+    k=4  0 1 1 0 1 0 0 1
 */
 
 int kthGrammar(int n, int k)
@@ -26,6 +31,6 @@ int kthGrammar(int n, int k)
 
 int main()
 {
-    cout << "\n Answer = " << kthGrammar(3,2) << endl;
+    cout << "\n Answer = " << kthGrammar(4, 4) << endl;
     return 0;
 }
