@@ -66,7 +66,7 @@ int safePos(int n, int k)
 
 int main()
 {
-    int res = safePos(50, 3);
+    int res = safePos(5, 2);
     cout << "Result = " << res << endl;
     return 0;
 }
