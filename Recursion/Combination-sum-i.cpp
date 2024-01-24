@@ -99,7 +99,8 @@ int main()
     vector<int> candiadtes = {2, 5, 2, 1, 2};
     candiadtes = {2, 3, 6, 7};
     candiadtes = {2, 3, 5};
-    vector<vector<int>> res = combinationSum1(candiadtes, 8);
+    candiadtes = {1,2, 3};
+    vector<vector<int>> res = combinationSum1(candiadtes, 4);
     DisplayArray(res);
     return 0;
 }
