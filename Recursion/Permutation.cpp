@@ -88,7 +88,7 @@ void Display(vector<vector<int>> res)
 
 int main()
 {
-    vector<int> nums = {4,4,4};
+    vector<int> nums = {1,2,3,4};
     vector<vector<int>> res = permute(nums);
     Display(res);
     return 0;
