@@ -96,11 +96,11 @@ void DisplayArray(vector<vector<int>> res)
 }
 int main()
 {
-    vector<int> candiadtes = {2, 5, 2, 1, 2};
-    candiadtes = {2, 3, 6, 7};
-    candiadtes = {2, 3, 5};
-    candiadtes = {1,2, 3};
-    vector<vector<int>> res = combinationSum1(candiadtes, 4);
+    vector<int> candidates = {2, 5, 2, 1, 2};
+    candidates = {2, 3, 6, 7};
+    candidates = {2, 3, 5};
+    candidates = {1, 2, 3};
+    vector<vector<int>> res = combinationSum1(candidates, 4);
     DisplayArray(res);
     return 0;
 }
