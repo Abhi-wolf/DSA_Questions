@@ -35,11 +35,11 @@ int countSubStrs(string str, int i, int j, int n)
     if (n == 1)
         return 1;
 
+    // 1) remove first character + 2)remove last character + 3)remove both first and last character
     int res = countSubStrs(str, i + 1, j, n - 1) + countSubStrs(str, i, j - 1, n - 1) - countSubStrs(str, i + 1, j - 1, n - 2);
 
     if (str[i] == str[j])
         res++;
-
     return res;
 }
 
