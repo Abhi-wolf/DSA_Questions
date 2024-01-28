@@ -138,7 +138,7 @@ Node *add(Node *first, Node *second)
         // inserts the remainder in LL
         InsertAtTail(ansHead, ansTail, digit);
 
-        // calculates carry(hasil) to carry forward
+        // calculates carry to carry forward
         carry = sum / 10;
 
         if (first)
