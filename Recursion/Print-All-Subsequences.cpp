@@ -29,6 +29,9 @@ void Subsequence(string input, string output)
     Subsequence(input.substr(1), out2);
 }
 
+
+
+
 int main()
 {
     string inp = "abc";
