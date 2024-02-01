@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <utility>
 #include <stack>
 using namespace std;
 
@@ -92,6 +93,35 @@ ListNode *removeNodes(ListNode *head)
     return newDummyHead->next;
 }
 
+// SECOND METHOD
+ListNode *removeNodes2(ListNode *head)
+{
+    if (head == NULL)
+        return NULL;
+
+    head = ReverseLL(head);
+    ListNode *curr = head, *prev = NULL;
+    int maxEle = curr->val;
+
+    while (curr)
+    {
+        if (curr->val < maxEle)
+        {
+            prev->next = curr->next;
+        }
+
+        else
+        {
+            maxEle = max(maxEle, curr->val);
+            prev = curr;
+        }
+        curr = curr->next;
+    }
+
+    head = ReverseLL(head);
+    return head;
+}
+
 ListNode *createListFromArray(vector<int> arr)
 {
     int n = arr.size(), i = 0;
@@ -133,6 +163,9 @@ int main()
     ListNode *head = createListFromArray(arr);
     Display(head);
     head = removeNodes(head);
+    Display(head);
+
+    head = removeNodes2(head);
     Display(head);
     return 0;
 }
