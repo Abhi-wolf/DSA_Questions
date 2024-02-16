@@ -83,7 +83,7 @@ void DisplayArray(vector<vector<int>> res)
 
 int main()
 {
-    vector<vector<int>> res = combine(20, 10);
+    vector<vector<int>> res = combine(20, 3);
     DisplayArray(res);
     return 0;
 }
