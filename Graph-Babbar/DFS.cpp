@@ -39,6 +39,8 @@ vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
 
     // used to track visited nodes
     unordered_map<int, bool> visited;
+
+    // answer
     vector<vector<int>> ans;
 
     makeAdjList(edges, adjList);
